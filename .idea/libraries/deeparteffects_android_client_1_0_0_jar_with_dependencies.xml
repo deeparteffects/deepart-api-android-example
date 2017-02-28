@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="deeparteffects-android-client-1.0.0-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/deeparteffects-android-client-1.0.0-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

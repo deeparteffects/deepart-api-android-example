@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 UploadRequest uploadRequest = new UploadRequest();
-                uploadRequest.setStyleId(String.valueOf(styleId));
+                uploadRequest.setStyleId(styleId);
                 uploadRequest.setImageBase64Encoded(convertBitmapToBase64(mImageBitmap));
                 UploadResponse response = deepArtEffectsClient.uploadPost(uploadRequest);
                 String submissionId = response.getSubmissionId();
