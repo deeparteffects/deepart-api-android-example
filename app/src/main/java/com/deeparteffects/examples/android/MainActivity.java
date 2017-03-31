@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final String API_KEY = "--INSERT YOUR API KEY--";
-    private static final String ACCESS_KEY = "--INSERT YOUR ACCESS KEY--";
-    private static final String SECRET_KEY = "--INSERT YOUR SECRET KEY--";
+    private static final String API_KEY = "XXcFTw7iek2dGydlWelEsOgRlGeqjQY7vEDD5Ck0";
+    private static final String ACCESS_KEY = "AKIAJRNERC3PVD2CT2TQ";
+    private static final String SECRET_KEY = "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";
 
     private static final int REQUEST_GALLERY = 100;
     private static final int CHECK_RESULT_INTERVAL_IN_MS = 2500;
@@ -110,10 +110,10 @@ public class MainActivity extends AppCompatActivity {
                         styles,
                         new StyleAdapter.ClickListener() {
                             @Override
-                            public void onClick(int styleId) {
+                            public void onClick(String styleId) {
                                 if (!isProcessing) {
                                     if (mImageBitmap != null) {
-                                        Log.d(TAG, String.format("Style with ID %d clicked.", styleId));
+                                        Log.d(TAG, String.format("Style with ID %s clicked.", styleId));
                                         isProcessing = true;
                                         mProgressbarView.setVisibility(View.VISIBLE);
                                         uploadImage(styleId);
@@ -169,9 +169,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(final int styleId) {
+    private void uploadImage(final String styleId) {
         mStatusText.setText("Uploading picture...");
-        Log.d(TAG, String.format("Upload image with style id %d", styleId));
+        Log.d(TAG, String.format("Upload image with style id %s", styleId));
         new Thread(new Runnable() {
             @Override
             public void run() {

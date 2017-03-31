@@ -33,7 +33,7 @@ public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> 
             if (styleImage == null) {
                 return;
             }
-            mClickListener.onClick(mStyles.get(getAdapterPosition()).getId().intValue());
+            mClickListener.onClick(mStyles.get(getAdapterPosition()).getId());
         }
     }
 
@@ -63,6 +63,6 @@ public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> 
     }
 
     public interface ClickListener {
-        void onClick(int styleId);
+        void onClick(String styleId);
     }
 }
