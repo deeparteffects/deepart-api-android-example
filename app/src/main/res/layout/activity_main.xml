@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -15,6 +14,16 @@
         android:padding="5dp"
         android:text="Choose picture" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/btnGallery"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:padding="15dp"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -25,23 +34,13 @@
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:layout_alignBaseline="@+id/btnGallery"
         android:layout_alignBottom="@+id/btnGallery"
         android:layout_toEndOf="@+id/progressBar"
+        android:padding="5dp"
         android:text="Status hint" />
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@id/btnGallery"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:padding="15dp" />
-
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

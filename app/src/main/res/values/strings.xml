@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Deep Art Effects Example</string>
+    <string name="loading">Loading styles…</string>
+    <string name="uploading">Uploading picture…</string>
+    <string name="processing">Picture processing…</string>
 </resources>

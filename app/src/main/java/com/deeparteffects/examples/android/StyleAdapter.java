@@ -1,30 +1,29 @@
 package com.deeparteffects.examples.android;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.deeparteffects.sdk.android.model.Styles;
 
 public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> {
 
-    private static final String TAG = StyleAdapter.class.getSimpleName();
-
     private Context mContext;
     private Styles mStyles;
     private ClickListener mClickListener;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView styleImage;
+        ImageView styleImage;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
-            styleImage = (ImageView) view.findViewById(R.id.styleImage);
+            styleImage = view.findViewById(R.id.styleImage);
             view.setOnClickListener(this);
         }
 
@@ -37,12 +36,13 @@ public class StyleAdapter extends RecyclerView.Adapter<StyleAdapter.ViewHolder> 
         }
     }
 
-    public StyleAdapter(Context context, Styles styles, ClickListener clickListener) {
+    StyleAdapter(Context context, Styles styles, ClickListener clickListener) {
         mContext = context;
         mStyles = styles;
         mClickListener = clickListener;
     }
 
+    @NonNull
     @Override
     public StyleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())

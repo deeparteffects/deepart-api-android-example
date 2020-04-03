@@ -1,13 +1,8 @@
 package com.deeparteffects.examples.android;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CHECK_RESULT_INTERVAL_IN_MS = 2500;
     private static final int IMAGE_MAX_SIDE_LENGTH = 768;
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private Bitmap mImageBitmap;
     private TextView mStatusText;
     private ImageView mImageView;
@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 }).region(EU_WEST_1.getName());
         deepArtEffectsClient = factory.build(DeepArtEffectsClient.class);
 
-        mStatusText = (TextView) findViewById(R.id.statusText);
-        mProgressbarView = (ProgressBar) findViewById(R.id.progressBar);
-        mImageView = (ImageView) findViewById(R.id.imageView);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mStatusText = findViewById(R.id.statusText);
+        mProgressbarView = findViewById(R.id.progressBar);
+        mImageView = findViewById(R.id.imageView);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Button btnGallery = (Button) findViewById(R.id.btnGallery);
+        Button btnGallery = findViewById(R.id.btnGallery);
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadingStyles() {
-        mStatusText.setText("Loading styles...");
+        mStatusText.setText(R.string.loading);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     private class ImageReadyCheckTimer extends TimerTask {
         private String mSubmissionId;
 
-        public ImageReadyCheckTimer(String submissionId) {
+        ImageReadyCheckTimer(String submissionId) {
             mSubmissionId = String.valueOf(submissionId);
         }
 
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadImage(final String styleId) {
-        mStatusText.setText("Uploading picture...");
+        mStatusText.setText(R.string.uploading);
         Log.d(TAG, String.format("Upload image with style id %s", styleId));
         new Thread(new Runnable() {
             @Override
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mStatusText.setText("Picture processing...");
+                        mStatusText.setText(R.string.processing);
                     }
                 });
             }
@@ -206,15 +206,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onActivityResult");
 
         //Handle own activity result
-        switch (requestCode) {
-            case REQUEST_GALLERY:
-                if (resultCode == RESULT_OK) {
-                    mImageBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(data.getData(),
-                            this.getContentResolver(), IMAGE_MAX_SIDE_LENGTH);
-                }
-                break;
-            default:
-                break;
+        if (requestCode == REQUEST_GALLERY) {
+            if (resultCode == RESULT_OK) {
+                mImageBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(data.getData(),
+                        this.getContentResolver(), IMAGE_MAX_SIDE_LENGTH);
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

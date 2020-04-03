@@ -1,24 +1,19 @@
 package com.deeparteffects.examples.android;
 
 import android.content.ContentResolver;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.provider.MediaStore;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Created by larrat on 22.02.17.
  */
 
-public class ImageHelper {
-    public static Bitmap loadSizeLimitedBitmapFromUri(
+class ImageHelper {
+    static Bitmap loadSizeLimitedBitmapFromUri(
             Uri imageUri,
             ContentResolver contentResolver,
             int imageMaxSideLength) {
@@ -31,7 +26,7 @@ public class ImageHelper {
             Rect outPadding = new Rect();
             BitmapFactory.decodeStream(imageInputStream, outPadding, options);
 
-            int maxSideLength = options.outWidth > options.outHeight ? options.outWidth : options.outHeight;
+            int maxSideLength = Math.max(options.outWidth, options.outHeight);
             options.inSampleSize = 1;
             options.inSampleSize = calculateSampleSize(maxSideLength, imageMaxSideLength);
             options.inJustDecodeBounds = false;
@@ -39,8 +34,7 @@ public class ImageHelper {
 
             imageInputStream = contentResolver.openInputStream(imageUri);
             Bitmap bitmap = BitmapFactory.decodeStream(imageInputStream, outPadding, options);
-            maxSideLength = bitmap.getWidth() > bitmap.getHeight()
-                    ? bitmap.getWidth() : bitmap.getHeight();
+            maxSideLength = Math.max(bitmap.getWidth(), bitmap.getHeight());
             double ratio = imageMaxSideLength / (double) maxSideLength;
             if (ratio < 1) {
                 bitmap = Bitmap.createScaledBitmap(
