@@ -23,4 +23,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation "commons-logging:commons-logging-api:1.1"
 }
